@@ -1,0 +1,32 @@
+{
+  "pluginAlias": "InsControl",
+  "pluginType": "accessory",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "homebridge-ins-control",
+        "type": "string",
+        "required": true,
+        "default": "Ins Control"
+      },
+      "host": {
+        "title": "Ins Host",
+        "type": "string",
+        "required": true
+      },
+      "port": {
+        "title": "Ins Port",
+        "type": "integer",
+        "required": true,
+        "default": 50000
+      },
+      "serialKey": {
+        "title": "Key",
+        "type": "string",
+        "required": true
+      }
+    }
+  }
+}

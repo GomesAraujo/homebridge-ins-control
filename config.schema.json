@@ -1,15 +1,40 @@
 {
   "pluginAlias": "InsControl",
-  "pluginType": "accessory",
+  "pluginType": "platform",
   "singular": true,
+  "headerDisplay": "Plugin responsible for controlling actions of the INS CONTROL app",
   "schema": {
     "type": "object",
     "properties": {
-      "name": {
-        "title": "homebridge-ins-control",
-        "type": "string",
+      "accessories": {
+        "title": "Accessories",
+        "description": "List of accessory configurations.",
+        "type": "array",
         "required": true,
-        "default": "Ins Control"
+        "items": {
+          "title": "Accessory",
+          "type": "object",
+          "properties": {
+            "name": {
+              "title": "Name",
+              "description": "The name of the accessory.",
+              "type": "string",
+              "required": true
+            },
+            "btnCode": {
+              "title": "Button Code",
+              "type": "string",
+              "required": true,
+              "default": " 210 0001 "
+            },
+            "identifier": {
+              "title": "Identifier",
+              "description": "The identifier used in the API.",
+              "type": "string",
+              "required": true
+            }
+          }
+        }
       },
       "host": {
         "title": "Ins Host",

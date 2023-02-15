@@ -6,12 +6,12 @@ Homebridge Config
    {
       "accessories": [
           {
-              "name": "Portao",
+              "name": "Garage",
               "btnCode": " 210 0001 ",
               "identifier": "GARAGE"
           },
           {
-              "name": "Pedestre",
+              "name": "door",
               "btnCode": " 210 0002 ",
               "identifier": "DOOR"
           }

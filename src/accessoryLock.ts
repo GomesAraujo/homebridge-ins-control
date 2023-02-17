@@ -34,18 +34,18 @@ export class InsControlLock implements AccessoryPlugin {
     // create handlers for required characteristics
     this.service.getCharacteristic(hap.Characteristic.LockCurrentState)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
-        handleDoorStateGet(this.doorStatus, this.name)
+        this.handleDoorStateGet.bind(this, this.doorStatus, this.name)
         callback(undefined, this.doorStatus);
       });
 
     this.service.getCharacteristic(hap.Characteristic.LockTargetState)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
-        handleDoorStateGet(this.doorStatus, this.name);
+        this.handleDoorStateGet.bind(this, this.doorStatus, this.name);
         callback(undefined, this.doorStatus);
       })
       .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
         this.doorStatus = value as number;
-        handleTargetDoorStateSet(this.doorStatus, this.btnCode);
+        this.handleTargetDoorStateSet.bind(this, this.doorStatus, this.btnCode);
         callback();
       });
 

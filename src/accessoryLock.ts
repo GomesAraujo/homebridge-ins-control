@@ -17,8 +17,6 @@ export class InsControlLock implements AccessoryPlugin {
   private readonly btnCode: string;
   public static CRLF: string = "\r\n";
   private doorStatus: number;
-  private handleDoorStateGet;
-  private handleTargetDoorStateSet;
   // This property must be existent!!
   name: string;
 
@@ -30,26 +28,23 @@ export class InsControlLock implements AccessoryPlugin {
     this.btnCode = config.btnCode;
     this.doorStatus = hap.Characteristic.LockCurrentState.SECURED;
     this.name = config.name;
-    this.handleDoorStateGet = handleDoorStateGet;
-    this.handleTargetDoorStateSet = handleTargetDoorStateSet;
-
     this.service = new hap.Service.LockMechanism(this.name);
 
     // create handlers for required characteristics
     this.service.getCharacteristic(hap.Characteristic.LockCurrentState)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
-        this.handleDoorStateGet.bind(this, this.doorStatus, this.name)
+        handleDoorStateGet.bind(this)(this.doorStatus, this.name);
         callback(undefined, this.doorStatus);
       });
 
     this.service.getCharacteristic(hap.Characteristic.LockTargetState)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
-        this.handleDoorStateGet.bind(this, this.doorStatus, this.name);
+        handleDoorStateGet.bind(this)(this.doorStatus, this.name);
         callback(undefined, this.doorStatus);
       })
       .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
         this.doorStatus = value as number;
-        this.handleTargetDoorStateSet.bind(this, this.doorStatus, this.btnCode);
+        handleTargetDoorStateSet.bind(this)(this.doorStatus, this.btnCode);
         callback();
       });
 

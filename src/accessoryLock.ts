@@ -17,6 +17,8 @@ export class InsControlLock implements AccessoryPlugin {
   private readonly btnCode: string;
   public static CRLF: string = "\r\n";
   private doorStatus: number;
+  private handleDoorStateGet;
+  private handleTargetDoorStateSet;
   // This property must be existent!!
   name: string;
 
@@ -28,6 +30,8 @@ export class InsControlLock implements AccessoryPlugin {
     this.btnCode = config.btnCode;
     this.doorStatus = hap.Characteristic.LockCurrentState.SECURED;
     this.name = config.name;
+    this.handleDoorStateGet = handleDoorStateGet;
+    this.handleTargetDoorStateSet = handleTargetDoorStateSet;
 
     this.service = new hap.Service.LockMechanism(this.name);
 

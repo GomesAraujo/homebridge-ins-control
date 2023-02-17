@@ -7,7 +7,8 @@ import {
   Service,
   CharacteristicEventTypes,
   CharacteristicValue,
-  CharacteristicSetCallback
+  CharacteristicSetCallback,
+  CharacteristicGetCallback
 } from "homebridge";
 
 export class InsControlLock implements AccessoryPlugin {
